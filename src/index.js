@@ -11,7 +11,7 @@ const DEFAULT_SETTINGS = {
 }
 
 
-const rootReducer = (state, action) => {
+const rootReducer = (state = DEFAULT_SETTINGS, action) => {
     console.log('state', state, 'action', action);
     
     if (action.type === 'SET_GAME_STARTED'){
@@ -20,7 +20,7 @@ const rootReducer = (state, action) => {
             instructionsExpanded:false
         }
     }
-    return DEFAULT_SETTINGS;
+    return state ;
 };
 const store = createStore(rootReducer);
 
