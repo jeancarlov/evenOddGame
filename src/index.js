@@ -20,20 +20,21 @@ const SET_INSTRUCTIONS_EXPANDED = 'SET_INSTRUCTIONS_EXPANDED';
 const rootReducer = (state = DEFAULT_SETTINGS, action) => {
     console.log('state', state, 'action', action);
     
-    if (action.type === SET_GAME_STARTED){
-        return {
-            gameStarted: action.gameStarted,
-            instructionsExpanded:false
-        }
+    switch(action.type){
+        case SET_GAME_STARTED:
+            return {
+                // code can be refactor using the spread operator 
+                gameStarted: action.gameStarted,
+                instructionsExpanded: state.instructionsExpanded
+            }
+        case SET_INSTRUCTIONS_EXPANDED:
+            return {
+                gameStarted: state.gameStarted,
+                instructionsExpanded:action.instructionsExpanded
+            }
+        default:
+            return state; 
     }
-    // 
-    if (action.type === SET_INSTRUCTIONS_EXPANDED){
-        return {
-            gameStarted: false,
-            instructionsExpanded:action.instructionsExpanded
-        }
-    }
-    return state ;
 };
 
 // ~~~~~~ Store which is collects the app data from  reducer and the reducer is receving the action 
@@ -61,10 +62,9 @@ const cancelInstructions = () => {
 
 // Action objects dispatch to reducers
 store.dispatch(startGame());
-store.dispatch(cancelGame());
 store.dispatch(expandInstructions());
+store.dispatch(cancelGame());
 store.dispatch(cancelInstructions());
-
 
 
 // dummy action object to check  the reducer respond to the actions
