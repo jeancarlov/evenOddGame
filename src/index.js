@@ -15,7 +15,7 @@ const SET_INSTRUCTIONS_EXPANDED = 'SET_INSTRUCTIONS_EXPANDED';
 
 
 
-// Main reducer
+// Main Reducer which is receiving signals from the action creators
 const rootReducer = (state = DEFAULT_SETTINGS, action) => {
     console.log('state', state, 'action', action);
     
@@ -27,6 +27,8 @@ const rootReducer = (state = DEFAULT_SETTINGS, action) => {
     }
     return state ;
 };
+
+// ~~~~~~ Store which is collects the app data from  reducer and the reducer is receving the action 
 const store = createStore(rootReducer);
 
 console.log('store', store); // the first store is the string is use to identify the store object on the right
@@ -34,7 +36,7 @@ console.log( 'store.getState()', store.getState());
 
 store.subscribe(() => console.log('store.getstarted()', store.getState()));
 
-// Action Creators
+// ~~~~~~~ Action Creators  #note action require a type action 
 const startGame = () => {
     return { type: SET_GAME_STARTED, gameStarted: true}
 }
@@ -49,6 +51,7 @@ const cancelInstructions = () => {
     return { type: SET_INSTRUCTIONS_EXPANDED, instructionsExpanded: false};
 };
 
+// Action objects dispatch to reducers
 store.dispatch(startGame());
 store.dispatch(cancelGame());
 store.dispatch(expandInstructions());
