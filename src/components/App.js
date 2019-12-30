@@ -11,5 +11,10 @@ class App extends Component {
   }
 }
 
-const componentConnector = connect();
+const mapStateToProps = state => {
+  console.log('state', state);
+  return { gameStarted: state.gameStarted };
+}
+
+const componentConnector = connect(mapStateToProps);
 export default componentConnector(App);
