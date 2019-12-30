@@ -5,6 +5,7 @@ import App from './components/App';
 import './index.css';
 import { type } from 'os';
 
+// javascript initializer syntax
 const DEFAULT_SETTINGS = {
     gameStarted: false,
     instructionsExpanded: false
@@ -23,6 +24,13 @@ const rootReducer = (state = DEFAULT_SETTINGS, action) => {
         return {
             gameStarted: action.gameStarted,
             instructionsExpanded:false
+        }
+    }
+    // 
+    if (action.type === SET_INSTRUCTIONS_EXPANDED){
+        return {
+            gameStarted: false,
+            instructionsExpanded:action.instructionsExpanded
         }
     }
     return state ;
