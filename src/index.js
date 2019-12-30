@@ -10,11 +10,16 @@ const DEFAULT_SETTINGS = {
     instructionsExpanded: false
 }
 
+const SET_GAME_STARTED = 'SET_GAME_STARTED';
+const SET_INSTRUCTIONS_EXPANDED = 'SET_INSTRUCTIONS_EXPANDED';
 
+
+
+// Main reducer
 const rootReducer = (state = DEFAULT_SETTINGS, action) => {
     console.log('state', state, 'action', action);
     
-    if (action.type === 'SET_GAME_STARTED'){
+    if (action.type === SET_GAME_STARTED){
         return {
             gameStarted: action.gameStarted,
             instructionsExpanded:false
@@ -29,11 +34,27 @@ console.log( 'store.getState()', store.getState());
 
 store.subscribe(() => console.log('store.getstarted()', store.getState()));
 
-const action1 = { gameStarted: true, type: 'SET_GAME_STARTED' };
-store.dispatch(action1);
+// Action Creators
+const startGame = () => {
+    return { type: SET_GAME_STARTED, gameStarted: true}
+}
+const cancelGame = () => {
+    return { type: SET_GAME_STARTED, gameStarted: false}
+}
 
-store.dispatch({ type: 'foo'});
-store.dispatch({ type: 'bar'});
+const expandInstructions = () => {
+    return { type: SET_INSTRUCTIONS_EXPANDED, instructionsExpanded: true};
+};
+const cancelInstructions = () => {
+    return { type: SET_INSTRUCTIONS_EXPANDED, instructionsExpanded: false};
+};
+
+store.dispatch(startGame());
+store.dispatch(cancelGame());
+store.dispatch(expandInstructions());
+store.dispatch(cancelInstructions());
+
+
 
 // dummy action object to check  the reducer respond to the actions
 
