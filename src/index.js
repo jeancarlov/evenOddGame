@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import App from './components/App';
-import './index.css';
 import rootReducer from './reducers/index'
+import './index.css';
 
 // ~~~~~~ Store which is collects the app data from  reducer and the reducer is receving the action 
 const store = createStore(rootReducer);
@@ -22,4 +23,7 @@ store.subscribe(() => console.log('store.getstarted()', store.getState()));
 
 // dummy action object to check  the reducer respond to the actions
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store} >
+        <App />
+    </Provider>, document.getElementById('root'));
