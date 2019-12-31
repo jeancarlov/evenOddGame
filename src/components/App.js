@@ -4,12 +4,7 @@ import { startGame, cancelGame } from "../actions/settings"
 
 class App extends Component {
   //local helper added to prevent the the function to be call directly in the JSX because its an anti-pattern
-  startGame = () => {
-    this.props.dispatch(startGame())
-  }
-  cancelGame = () => {
-    this.props.dispatch(cancelGame())
-  }
+  
   render() {
     console.log('this', this);
     
@@ -22,13 +17,13 @@ class App extends Component {
             <div>
               <h3>The game is on ! </h3>
               <br />
-              <button onClick = {this.cancelGame}>Cancel game</button>
+              <button onClick = {this.props.cancelGame}>Cancel game</button>
             </div>
           ) : (
             <div>
               <h3> A new game awaits</h3>
               <br />
-              <button onClick = {this.startGame}>Start game</button>
+              <button onClick = {this.props.startGame}>Start game</button>
             </div>
           )
         }
@@ -50,5 +45,5 @@ const mapDispatchToProps = dispatch => {
 } 
 
 // mapDispatchToProps added as the second parameter in the connector fn 
-const componentConnector = connect(mapStateToProps, );
+const componentConnector = connect(mapStateToProps, mapDispatchToProps );
 export default componentConnector(App);
