@@ -42,5 +42,13 @@ const mapStateToProps = state => {
   return { gameStarted: state.gameStarted };
 }
 
-const componentConnector = connect(mapStateToProps);
+const mapDispatchToProps = dispatch => {
+  return {
+    startGame: () => dispatch(startGame()),
+    cancelGame: () => dispatch(cancelGame())
+  };
+} 
+
+// mapDispatchToProps added as the second parameter in the connector fn 
+const componentConnector = connect(mapStateToProps, );
 export default componentConnector(App);
