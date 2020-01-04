@@ -1,4 +1,8 @@
-import { SET_GAME_STARTED, SET_INSTRUCTIONS_EXPANDED} from '../actions/types'
+import { 
+    SET_GAME_STARTED, 
+    SET_INSTRUCTIONS_EXPANDED, 
+    FETCH_DECK_RESULT}  from '../actions/types';
+
 
 // javascript initializer syntax
 const DEFAULT_SETTINGS = {
