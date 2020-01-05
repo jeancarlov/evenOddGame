@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startGame, cancelGame } from "../actions/settings"
-import { fetchDeckResult } from  '../actions/deck'; // attach this method to the redux mapDispathcToProps method
+import { fetchNewDeck  } from  '../actions/deck'; // attach this method to the redux mapDispathcToProps method
 
 
 class App extends Component {
   //local helper added to prevent the the function to be call directly in the JSX because its an anti-pattern
   startGame = () => {
     this.props.startGame();
-
-    //call fetch method
-    fetch('https://deck-of-cards-api-wrapper.appspot.com/deck/new/shuffle')
-    .then(response => response.json())
-    .then( json => this.props.fetchDeckResult(json));
+    this.props.fetchNewDeck();
   }
   render() {
     console.log('this', this);
@@ -50,7 +46,7 @@ const mapDispatchToProps = dispatch => {
   return {
     startGame: () => dispatch(startGame()),
     cancelGame: () => dispatch(cancelGame()),
-    fetchDeckResult: deckJson => dispatch(fetchDeckResult(deckJson))
+    fetchNewDeck: () => (fetchNewDeck(dispatch)) // refactor this code for the json obtect to have acces to the store #67
   };
 } 
 
