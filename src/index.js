@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import App from './components/App';
 import rootReducer from './reducers/index'
 import './index.css';
 
+
 // ~~~~~~ Store which is collects the app data from  reducer and the reducer is receving the action 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 console.log('store', store); // the first store is the string is use to identify the store object on the right
 console.log( 'store.getState()', store.getState());
