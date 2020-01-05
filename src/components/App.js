@@ -42,14 +42,17 @@ const mapStateToProps = state => {
   return { gameStarted: state.gameStarted };
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    startGame: () => dispatch(startGame()),
-    cancelGame: () => dispatch(cancelGame()),
-    fetchNewDeck: () => (fetchNewDeck(dispatch)) // refactor this code for the json obtect to have acces to the store #67
-  };
-} 
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     startGame: () => dispatch(startGame()),
+//     cancelGame: () => dispatch(cancelGame()),
+//     fetchNewDeck: () => dispatch(fetchNewDeck()) // refactor this code for the json obtect to have acces to the store #67
+//   };
+// } 
 
 // mapDispatchToProps added as the second parameter in the connector fn 
-const componentConnector = connect(mapStateToProps, mapDispatchToProps );
+const componentConnector = connect(mapStateToProps,
+  { startGame, cancelGame, fetchNewDeck}
+  );
 export default componentConnector(App);
+
