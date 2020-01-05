@@ -18,7 +18,12 @@ export const fetchDeckError = error =>{
 export const fetchNewDeck = () => dispatch => {
     //call fetch method and make it the return of the function 
      return fetch('https://deck-of-cards-api-wrapper.appspot.com/deck/new/shuffle')
-        .then(response => response.json())
+        .then(response => {
+            if (response.status !== 200){
+                throw new Error('Unsuccessful request to deck of cards api, please try again');
+            }
+            return response.json()
+        })
         .then( json => dispatch(fetchDeckSuccess(json)))
         .catch( error => dispatch(fetchDeckError(error)));
 }
