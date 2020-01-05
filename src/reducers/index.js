@@ -18,14 +18,18 @@ const DEFAULT_SETTINGS = {
         case SET_GAME_STARTED:
             return {
                 // code can be refactor using the spread operator 
-                gameStarted: action.gameStarted,
-                instructionsExpanded: state.instructionsExpanded
-            }
+                ...state, gameStarted: action.gameStarted,
+            };
         case SET_INSTRUCTIONS_EXPANDED:
             return {
-                gameStarted: state.gameStarted,
-                instructionsExpanded:action.instructionsExpanded
+                ...state, instructionsExpanded:action.instructionsExpanded
             }
+        case FETCH_DECK_RESULT:
+            // grab the remaining and deck_id from the action object by destructuring and mixed those in within the return state for the actual reducer
+            const { remaining, deck_id } = action;
+            return {
+                ...state, remaining, deck_id 
+            };
         default:
             return state; 
     }

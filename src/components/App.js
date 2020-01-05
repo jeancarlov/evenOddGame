@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startGame, cancelGame } from "../actions/settings"
+import { fetchDeckResult } from  '../actions/deck'; // attach this method to the redux mapDispathcToProps method
+
 
 class App extends Component {
   //local helper added to prevent the the function to be call directly in the JSX because its an anti-pattern
-  
+  startGame = () => {
+    this.props.startGame();
+
+    //call fetch method
+    fetch('https://deckofcardsapi.com/api/deck/new/shuffle')
+    .then(response => response.json())
+    .then( json => this.props.fetchDeckResult(json));
+  }
   render() {
     console.log('this', this);
     
@@ -23,7 +32,7 @@ class App extends Component {
             <div>
               <h3> A new game awaits</h3>
               <br />
-              <button onClick = {this.props.startGame}>Start game</button>
+              <button onClick = {this.startGame}>Start game</button>
             </div>
           )
         }
@@ -40,7 +49,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     startGame: () => dispatch(startGame()),
-    cancelGame: () => dispatch(cancelGame())
+    cancelGame: () => dispatch(cancelGame()),
+    fetchDeckResult: deckJson => dispatch(fetchDeckResult(deckJson))
   };
 } 
 
