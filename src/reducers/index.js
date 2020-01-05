@@ -1,7 +1,7 @@
 import { 
     SET_GAME_STARTED, 
     SET_INSTRUCTIONS_EXPANDED, 
-    FETCH_DECK_RESULT}  from '../actions/types';
+    DECK}  from '../actions/types';
 
 
 // javascript initializer syntax
@@ -24,11 +24,15 @@ const DEFAULT_SETTINGS = {
             return {
                 ...state, instructionsExpanded:action.instructionsExpanded
             }
-        case FETCH_DECK_RESULT:
+        case DECK.FETCH_SUCCESS:
             // grab the remaining and deck_id from the action object by destructuring and mixed those in within the return state for the actual reducer
             const { remaining, deck_id } = action;
             return {
                 ...state, remaining, deck_id 
+            };
+        case DECK.FETCH_ERROR:
+            return {
+                ...state, message: action.message,
             };
         default:
             return state; 
