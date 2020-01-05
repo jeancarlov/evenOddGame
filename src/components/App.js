@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { startGame, cancelGame } from "../actions/settings"
 import { fetchNewDeck  } from  '../actions/deck'; // attach this method to the redux mapDispathcToProps method
-
+import fetchState from '../reducers/fetchState';
 
 class App extends Component {
   //local helper added to prevent the the function to be call directly in the JSX because its an anti-pattern
@@ -39,7 +39,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   console.log('state', state);
-  return { gameStarted: state.gameStarted };
+  return { gameStarted: state.gameStarted, fetchState: state.fetchState, message: state.message };
 }
 
 // const mapDispatchToProps = dispatch => {

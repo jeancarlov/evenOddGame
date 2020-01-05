@@ -2,7 +2,7 @@ import {
     SET_GAME_STARTED, 
     SET_INSTRUCTIONS_EXPANDED, 
     DECK}  from '../actions/types';
-
+import fetchState from './fetchState';
 
 // javascript initializer syntax
 const DEFAULT_SETTINGS = {
@@ -28,11 +28,11 @@ const DEFAULT_SETTINGS = {
             // grab the remaining and deck_id from the action object by destructuring and mixed those in within the return state for the actual reducer
             const { remaining, deck_id } = action;
             return {
-                ...state, remaining, deck_id 
+                ...state, remaining, deck_id,  fetchState: fetchState.success
             };
         case DECK.FETCH_ERROR:
             return {
-                ...state, message: action.message,
+                ...state, message: action.message, fetchState: fetchState.error
             };
         default:
             return state; 
