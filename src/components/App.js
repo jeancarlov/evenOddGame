@@ -10,7 +10,7 @@ class App extends Component {
     this.props.startGame();
 
     //call fetch method
-    fetch('https://deckofcardsapi.com/api/deck/new/shuffle')
+    fetch('https://deck-of-cards-api-wrapper.appspot.com/deck/new/shuffle')
     .then(response => response.json())
     .then( json => this.props.fetchDeckResult(json));
   }
