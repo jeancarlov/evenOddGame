@@ -12,6 +12,16 @@ class App extends Component {
   }
   render() {
     console.log('this', this);
+
+    // Checking the fetchState code 
+    if (this.props.fetchState === fetchState.error){
+      return(
+        <div>
+        <p> Please try reloading the app.</p>
+        <p> {this.props.message}</p>
+        </div>
+      )
+    }
     
     // render different UI feature with a ternary expression
     return (
@@ -39,7 +49,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   console.log('state', state);
-  return { gameStarted: state.gameStarted, fetchState: state.fetchState, message: state.message };
+  const { gameStarted, fetchState, message} = state
+  return { gameStarted, fetchState, message};
 }
 
 // const mapDispatchToProps = dispatch => {
