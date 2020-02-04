@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { startGame, cancelGame } from "../actions/settings"
 import { fetchNewDeck  } from  '../actions/deck'; // attach this method to the redux mapDispathcToProps method
 import fetchState from '../reducers/fetchState';
+import DeckCard from '../components/DrawCard';
+
+// import settingsReducer from '../reducers/settings';
+// import combineReducers from '../reducers/index';
 
 class App extends Component {
   //local helper added to prevent the the function to be call directly in the JSX because its an anti-pattern
@@ -11,7 +15,7 @@ class App extends Component {
     this.props.fetchNewDeck();
   }
   render() {
-    console.log('this', this);
+    console.log('this', this); 
 
     // Checking the fetchState code 
     if (this.props.fetchState === fetchState.error){
@@ -32,6 +36,8 @@ class App extends Component {
             <div>
               <h3>The game is on ! </h3>
               <br />
+              <DeckCard />
+              <hr />
               <button onClick = {this.props.cancelGame}>Cancel game</button>
             </div>
           ) : (
@@ -48,10 +54,18 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state', state);
-  const { gameStarted, fetchState, message} = state
-  return { gameStarted, fetchState, message};
+  // console.log( 'state', state );
+  const {
+    settings: { gameStarted },
+    deck: { fetchState, message }
+  } = state;
+  
+  // const { gameStarted } = state.settings;
+  // const { fetchState, message } = state.deck;
+
+  return { gameStarted, fetchState, message };
 }
+  
 
 // const mapDispatchToProps = dispatch => {
 //   return {
@@ -66,4 +80,5 @@ const componentConnector = connect(mapStateToProps,
   { startGame, cancelGame, fetchNewDeck}
   );
 export default componentConnector(App);
+
 

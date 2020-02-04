@@ -1,7 +1,7 @@
 import { DECK } from  './types';
 
-export const fetchDeckSuccess = deckjson => {
-    const { remaining, deck_id } = deckjson;
+export const fetchDeckSuccess = deckJson => {
+    const { remaining, deck_id } = deckJson;
 
     return { type: DECK.FETCH_SUCCESS, remaining, deck_id };
 }
